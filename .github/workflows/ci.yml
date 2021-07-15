@@ -52,8 +52,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: [12, 14, 15]
+        os: [ubuntu-latest]
+        node-version: [12]
     steps:
       - name: "Check out Git repository"
         uses: actions/checkout@v2
@@ -106,51 +106,8 @@ jobs:
           ./cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3
           ./cc-test-reporter upload-coverage
         shell: bash
-  e2e:
-    runs-on: windows-latest
-    steps:
-      - name: "Check out Git repository"
-        uses: actions/checkout@v2
-      - name: "Use Node.js 14"
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - name: "Install CLI tools"
-        run: npm install -g @angular/cli
-      - name: "Install application"
-        run: npm install
-      - name: "Execute end-to-end tests"
-        uses: nick-invision/retry@v2
-        continue-on-error: true
-        with:
-          timeout_minutes: 20
-          max_attempts: 2
-          command: |
-            set NODE_ENV=test
-            npm run protractor
-  e2e-in-subfolder:
-    runs-on: windows-latest
-    steps:
-      - name: "Check out Git repository"
-        uses: actions/checkout@v2
-      - name: "Use Node.js 14"
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - name: "Install CLI tools"
-        run: npm install -g @angular/cli
-      - name: "Install application"
-        run: npm install
-      - name: "Execute end-to-end tests with application hosted in subfolder"
-        uses: nick-invision/retry@v2
-        continue-on-error: true
-        with:
-          timeout_minutes: 20
-          max_attempts: 2
-          command: |
-            set NODE_ENV=test
-            npm run preprotractor
-            npm run e2e -- subfolder
+
+
   smoke:
     runs-on: ubuntu-latest
     steps:
