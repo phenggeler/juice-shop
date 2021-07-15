@@ -42,10 +42,10 @@ jobs:
           npm install --ignore-scripts
           cd frontend
           npm install --ignore-scripts
-      - name: Snyk monitor
-        run: snyk test
-        continue-on-error: true
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
+        with:
+          command: monitor
 
