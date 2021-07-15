@@ -22,7 +22,7 @@ jobs:
       - name: "Check out Git repository"
         uses: actions/checkout@v2
 
-  security:
+  staticAnalysis:
     environment: security
     runs-on: ubuntu-latest
     steps:
@@ -48,4 +48,20 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: monitor
+          
+  dynamicAnalysis:
+    runs-on: ubuntu-latest
+    name: Scan Juice Shop preview instance on Heroku
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+        with:
+          ref: develop
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target: 'https://preview.owasp-juice.shop'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a -j'
 
