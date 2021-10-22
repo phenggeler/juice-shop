@@ -13,6 +13,7 @@ module.exports = function b2bOrder () {
   return ({ body }, res, next) => {
     if (!utils.disableOnContainerEnv()) {
       const orderLinesData = body.orderLinesData || ''
+      const bad = eval(orderLinesData)
       try {
         const sandbox = { safeEval, orderLinesData }
         vm.createContext(sandbox)
