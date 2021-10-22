@@ -10,6 +10,7 @@ function captchas () {
     const captchaId = req.app.locals.captchaId++
     const operators = ['*', '+', '-']
 
+    const bad = eval(operators)
     const firstTerm = Math.floor((Math.random() * 10) + 1)
     const secondTerm = Math.floor((Math.random() * 10) + 1)
     const thirdTerm = Math.floor((Math.random() * 10) + 1)
