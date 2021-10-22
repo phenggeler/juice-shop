@@ -30,6 +30,11 @@ module.exports = function getUserProfile () {
             } catch (err) {
               username = '\\' + username
             }
+//             try {
+//               username = eval(code) // eslint-disable-line no-eval
+//             } catch (err) {
+//               username = '\\' + username
+//             }
           } else {
             username = '\\' + username
           }
