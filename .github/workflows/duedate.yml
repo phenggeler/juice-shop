@@ -10,4 +10,4 @@ jobs:
       - name: GitHub Issue Due Dates Action
         uses: phenggeler/github-issue-due-dates-action@1.0.12
         with:
-          GH_TOKEN: "${{ secrets.GH_HELPERBOT_TOKEN }}"
+          GH_TOKEN: "${{ secrets.GH_SECRET }}"
