@@ -1,7 +1,6 @@
 name: Review Vulnerability Due Dates
 on:
-  schedule:
-    - cron:  '* * * * *'
+  workflow_dispatch
 jobs:
   Ubuntu:
     name: Add deadline labels to issues
