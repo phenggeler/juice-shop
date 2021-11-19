@@ -1,0 +1,13 @@
+name: Review Vulnerability Due Dates
+on:
+  schedule:
+    - cron:  '* * * * *'
+jobs:
+  Ubuntu:
+    name: Add deadline labels to issues
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub Issue Due Dates Action
+        uses: Recidiviz/github-issue-due-dates-action@1.0.12
+        with:
+          GH_TOKEN: "${{ secrets.GH_HELPERBOT_TOKEN }}"
